@@ -6,17 +6,24 @@ from requests import get
 class yify():
 
     class torrent():
-        def __init__(self , name='' , link = ''):
+        def __init__(self , name='' , page = ''):
             self.name = name ;
-            self.link = link ; #Link to the torrent page
+            self.page = page ; #Link to the torrent page
 
         def __str__(self):
-            return "Name : {}   |   Page : {}".format(self.name , self.link) ;
+            return "Name : {}   |   Page : {}".format(self.name , self.page) ;
         def __repr__(self):
-            return "Name : {}   |   Page : {}".format(self.name , self.link) ;
+            return "Name : {}   |   Page : {}".format(self.name , self.page) ;
             
         def getinfo(self):
-            soup  = BeautifulSoup(get(self.link).text , 'html.parser') ;
+            soup  = BeautifulSoup(get(self.page).text , 'html.parser') ;
+            self.magnet  = soup.select("a[class='large button orange']")[0].get('href') ;
+            self.link = soup.select("a[class='middle button orange'")[0].get('href') ;
+            self.link2 = soup.select("a[class='middle button red'")[0].get('href') ;
+
+            self.imdblink = soup.select("") 
+            self.imdbrating = 
+
 
 
 
@@ -68,7 +75,6 @@ class yify():
         self.names = topseeds_names
         self.links = topseeds_links 
         
-        return topseeds ;
 
  
         

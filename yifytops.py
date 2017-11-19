@@ -1,7 +1,7 @@
 import time;
 from bs4 import BeautifulSoup
 from requests import get
-
+import re 
 
 class yify():
 
@@ -16,13 +16,34 @@ class yify():
             return "Name : {}   |   Page : {}".format(self.name , self.page) ;
             
         def getinfo(self):
+            '''
+            Gets all the info about the torrent and returns a dictionary containing all the info
+            
+            '''
             soup  = BeautifulSoup(get(self.page).text , 'html.parser') ;
-            self.magnet  = soup.select("a[class='large button orange']")[0].get('href') ;
-            self.link = soup.select("a[class='middle button orange'")[0].get('href') ;
-            self.link2 = soup.select("a[class='middle button red'")[0].get('href') ;
+            magnet  = soup.select("a[class='large button orange']")[0].get('href') ;
+            link = soup.select("a[class='middle button orange'")[0].get('href') ;
+            link2 = soup.select("a[class='middle button red'")[0].get('href') ;
 
-            self.imdblink = soup.select("") 
-            self.imdbrating = 
+            self.magnet = magnet ; 
+            self.link = link ;
+
+            attrs = soup.select("div[class='inattr']") ;
+            
+            infos ={'magnet' : magnet, 
+            'link' : link , 
+            'link2' : link2} ;
+
+            for info in attrs.find_all('li'):
+                infos[info.b] = re.search("{}\s*:(.*)" , info.text ).group(1).strip() ;
+
+            return info ;
+
+                
+
+
+                
+                
 
 
 
@@ -54,7 +75,7 @@ class yify():
 
 
 
-    def get_top_seeds(self):
+    def get_top_seeded_torrents(self):
         self.topseeds = self.soup.find(id="topseed").find_all('a');
 
 

@@ -1,7 +1,10 @@
+import os
+import urllib3
 import time;
 from bs4 import BeautifulSoup
 from requests import get
 import re 
+
 
 class yify():
 
@@ -15,87 +18,91 @@ class yify():
         def __repr__(self):
             return "Name : {}   |   Page : {}".format(self.name , self.page) ;
             
-        def getinfo(self):
+
+        def getinfo(self , quality='All' , minimum_rating = 0 , 
+        query_term = '' , genre='All' , sort_by='date_added' ,
+        order_by = 'desc' , with_rt_ratings='false'):
             '''
             Gets all the info about the torrent and returns a dictionary containing all the info
             
             '''
-            soup  = BeautifulSoup(get(self.page).text , 'html.parser') ;
-            magnet  = soup.select("a[class='large button orange']")[0].get('href') ;
-            link = soup.select("a[class='middle button orange'")[0].get('href') ;
-            link2 = soup.select("a[class='middle button red'")[0].get('href') ;
+            self.name = re.search("^[^\(]+" ,self.name).group(0).strip() ; 
+            print(self.name) ; 
+            url = "https://yts.ag/api/v2/list_movies.json" ;
 
-            self.magnet = magnet ; 
-            self.link = link ;
+            url = url+ '?' +  urllib3.request.urlencode({
+                'quality' : quality , 
+                'minimum_rating' : minimum_rating , 
+                'query_term' : query_term , 
+                'genre' : genre , 
+                'sort_by' : sort_by , 
+                'order_by' : order_by , 
+                'with_rt_ratings' : with_rt_ratings
+            })            
 
-            attrs = soup.select("div[class='inattr']") ;
-            
-            infos ={'magnet' : magnet, 
-            'link' : link , 
-            'link2' : link2} ;
+            print(url) ;
 
-            for info in attrs.find_all('li'):
-                infos[info.b] = re.search("{}\s*:(.*)" , info.text ).group(1).strip() ;
-
-            return info ;
-
-                
-
-
-                
-                
+            # resp = get(url) ;
+            # print(resp.text) ;   
 
 
 
+    # class topseed():
+    #     def __init__(self):
+    #         pass ; 
 
-    class topseed():
-        def __init__(self):
-            pass ; 
-
-        def get_top_seeded_torrents(self):
-            '''Returns the top seeded torrent objects'''
-            raise NotImplementedError ;
+    #     def get_top_seeded_torrents(self):
+    #         '''Returns the top seeded torrent objects'''
+    #         raise NotImplementedError ;
 
         
 
 
-    def __init__(self):
-        resp = '';
-        while(not resp):
-            try:
-                resp = get('https://www.yify-torrent.org/', timeout=3);
+    # def __init__(self):
+    #     resp = '';
+    #     while(not resp):
+    #         try:
+    #             resp = get('https://www.yify-torrent.org/', timeout=3);
 
-            except Exception as e:
-                print(e);
-                print(
-                    "\nServer refused connection . \nSleeping for 5 seconds .....\nZZZzzzzzzzzz\n\n");
-                time.sleep(5);
+    #         except Exception as e:
+    #             print(e);
+    #             print(
+    #                 "\nServer refused connection . \nSleeping for 5 seconds .....\nZZZzzzzzzzzz\n\n");
+    #             time.sleep(5);
 
-        self.soup = BeautifulSoup(resp.text, 'html.parser');
+    #     self.soup = BeautifulSoup(resp.text, 'html.parser');
 
 
 
     def get_top_seeded_torrents(self):
-        self.topseeds = self.soup.find(id="topseed").find_all('a');
+        '''Returns a list of Top Seeded Torrents which are listed in the Yify Website when the function is called '''
+        soup = BeautifulSoup(get('https://www.yify-torrent.org/', timeout=3).text , 'html.parser') ;
+        self.topseeds = soup.find(id="topseed").find_all('a');
 
 
-        topseeds_names =  [];
-        topseeds_links = [] ; 
-
+        # topseeds_names =  [];
+        # topseeds_links = [] ; 
+        top_torrents = [] 
 
         for i in self.topseeds:
-            topseeds_names.append(i.text);
-            topseeds_links.append(i.get('href')) ;
+            movie = self.torrent(name=i.text , page = i.get('href')) ; 
+            movie.getinfo()
+            top_torrents.append(movie) ; 
+        #     # topseeds_names.append(i.text);
+        #     # topseeds_links.append(i.get('href')) ;
 
 
-        # for i in range(len(topseeds)):
-        #     topseeds[i] = topseeds[i].strip('1080p').strip() ; 
+        # # for i in range(len(topseeds)):
+        # #     topseeds[i] = topseeds[i].strip('1080p').strip() ; 
 
-        # topseeds = list(set(topseeds)) ;
+        # # topseeds = list(set(topseeds)) ;
 
-        self.names = topseeds_names
-        self.links = topseeds_links 
+        # self.names = topseeds_names
+        # self.links = topseeds_links 
         
 
  
         
+if __name__=='__main__':
+    obj = yify() ; 
+    obj.get_top_seeded_torrents() ;

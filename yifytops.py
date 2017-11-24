@@ -9,16 +9,23 @@ import re
 
 class yify():
 
-
+    homepage = "https://www.yify-torrent.org"
 
     class torrent():
+        pass ; 
+
+
+    class movie():
         def __init__(self , name='' , page = ''):
             self.name = name ;
             self.page = page ; #Link to the torrent page
 
         def __str__(self):
-            return "Name : {}   |   Page : {}".format(self.name , self.page) ;
-        def __repr__(self): return "Name : {}   |   Page : {}".format(self.name , self.page) ; 
+            return "Name : {}\n Page : {}\n".format(self.name , self.page) ;
+        def __repr__(self):
+            return '''Name : {}
+Page : {}
+Torrent info obtained : {}'''.format(self.name , self.page , True if hasattr(self , 'id') else False) ;
 
 
         def getinfo(self , quality='All' , minimum_rating = 0 , 
@@ -45,12 +52,12 @@ class yify():
             resp = get(url , timeout = 3) ;
             data = json.loads(resp.text) ; 
             movie = data.get('data').get("movies")[0] ;
-            return __get_torrent_obj__(movie) ;
             print(url) ;
+            return __get_movies_obj__(movie) ;
 
         
 
-        def __get_torrent_obj__(self , movie) : 
+        def __get_movies_obj__(self , movie) : 
                 self.id = movie.get('id')
                 self.url = movie.get('url')
                 self.imdb_code = movie.get('imdb_code')
@@ -70,36 +77,43 @@ class yify():
                 movie.get('small_cover_image'),
                 movie.get('medium_cover_image'),
                 movie.get('large_cover_image')]
+                self.torrents_list = movie.get('torrents') ;
     
 
 
-    def search_torrent(self , search_string = ''  , minimum_rating = 0 , 
+    def search_movies(self , search_string = '' , quality='All' , minimum_rating = 0 , 
         genre='' ):
         '''Used to search for particular movies which match the given parameters. 
         The Search String can be a Movie Title/IMDb Code, Actor Name/IMDb Code, Director Name/IMDb Code '''
 
-            self.name = re.search("^[^\(]+" , search_string).group(0).strip() ; 
-            print(self.name) ; 
-            url = "https://yts.ag/api/v2/list_movies.json" ;
+        self.name = re.search("^[^\(]+" , search_string).group(0).strip() ; 
+        print(self.name) ; 
+        url = "https://yts.ag/api/v2/list_movies.json" ;
 
-            url = url+ '?' +  urllib3.request.urlencode({
-                'minimum_rating' : minimum_rating , 
-                'query_term' : search_string, 
-                'genre' : genre , 
-            })            
+        url = url+ '?' +  urllib3.request.urlencode({
+            'minimum_rating' : minimum_rating , 
+            'quality' : quality , 
+            'query_term' : search_string, 
+            'genre' : genre , 
+        })            
 
-            resp = get(url , timeout = 3) ;
-            
-            data  = json.loads(resp.text) ; 
+        resp = get(url , timeout = 3) ;
+        
+        data  = json.loads(resp.text) ; 
 
-            if(data.get('data').get('movies')):
-                
+        if(data.get('data').get('movies')):
+            movies = [] ;
+            for i in data.get('data').get('movies'):
+                movie = self.movie(name = i.get('title')) ; 
+                movie.__get_movies_obj__(i) ; 
+                movies.append(movie) ; 
+
+            return movies ; 
+
+        else:
+            return [] ;  
 
 
-            else
-                return [] ;  
-
- 
          
 
         
@@ -108,31 +122,28 @@ class yify():
 
 
     def get_top_seeded_torrents(self):
-        '''Returns a list of Top Seeded Torrents which are listed in the Yify Website when the function is called '''
-        soup = BeautifulSoup(get('https://www.yify-torrent.org/', timeout=3).text , 'html.parser') ;
+        '''Returns a list of Top Seeded Torrent's Movies which are listed in the Yify Website. 
+        Each movie in the returned list contains only the 'movie name' and its corresponding 'page' attributes .
+        All the rest of the details about the movie and the torrent can be obtained after calling the get_movie_info function on the movie object'''
+
+        soup = BeautifulSoup(get(self.homepage , timeout=3).text , 'html.parser') ;
         topseeds = soup.find(id="topseed").find_all('a');
 
 
-        # topseeds_names =  [];
-        # topseeds_links = [] ; 
         top_torrents = [] 
+        name_link = {} ; 
 
         for i in topseeds:
-            movie = self.torrent(name=i.text , page = i.get('href')) ; 
-            # movie.getinfo()
+            name = re.search('^[^\(]+' , i.text).group(0).strip() ; 
+            name_link[name] = self.homepage + i.get('href') ; 
+
+
+        for key,val in name_link:
+            movie = self.movie(name = key , page  = val) ; 
             top_torrents.append(movie) ; 
-        #     # topseeds_names.append(i.text);
-        #     # topseeds_links.append(i.get('href')) ;
 
+        print(name_link) ; 
 
-        # # for i in range(len(topseeds)):
-        # #     topseeds[i] = topseeds[i].strip('1080p').strip() ; 
-
-        # # topseeds = list(set(topseeds)) ;
-
-        # self.names = topseeds_names
-        # self.links = topseeds_links 
-        
 
  
         

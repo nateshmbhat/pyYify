@@ -77,7 +77,6 @@ class yify():
                 os.system("xdg-open "+self.magnet) ; 
             
              
-            
 
 
     class movie():
@@ -87,6 +86,7 @@ class yify():
 
         def __str__(self):
             return "Name : {}\nPage : {}\n".format(self.name , self.page) ;
+
         def __repr__(self):
             return '''Name : {}\nPage : {}\nTorrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr(self , 'id') else False);
 

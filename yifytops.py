@@ -1,6 +1,7 @@
 import os
 import json
 import urllib3
+import urllib
 import time
 from bs4 import BeautifulSoup
 from requests import get
@@ -17,10 +18,10 @@ class yify():
 
     class torrent():
         def __repr__(self):
-            return 'yify.torrent object : quality = {} , size = {} , url = {}'.format(self.quality , self.size, self.url) ; 
+            return 'yify.torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
 
         def __str__(self):
-            return 'yify.torrent object : quality = {} , size = {} , url = {}'.format(self.quality , self.size, self.url) ; 
+            return 'yify.torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
 
         def __init__(self , torrent_dict : dict  ):
                 self.url = torrent_dict.get('url')
@@ -31,6 +32,24 @@ class yify():
                 self.size = torrent_dict.get('size')
                 self.date_uploaded = torrent_dict.get('date_uploaded')
                 
+        
+        
+        def download_torrent_file(self , path : str = os.path.expanduser('~/Downloads/') , filename = '' ):
+            '''Downloads the torrent file into given path directory with the specified filename'''
+            
+            if not filename:
+                filename = self.name+'.torrent'
+            else:
+                filename = filename.strip('.torrent') + '.torrent'  
+                
+            print(self.url) ;
+            urlopen = urllib.request.URLopener() ; 
+            urlopen.addheaders=[('User-Agent' , 'Mozilla/5.0')]
+            urlopen.retrieve(self.url , path+filename)
+
+
+        def start_download(self):
+            pass ; 
             
 
 
@@ -42,12 +61,7 @@ class yify():
         def __str__(self):
             return "Name : {}\nPage : {}\n".format(self.name , self.page) ;
         def __repr__(self):
-            return '''Name : {}
-Page : {}
-Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr(self , 'id') else False) ;
-
-
-
+            return '''Name : {}\nPage : {}\nTorrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr(self , 'id') else False);
 
 
         def getinfo(self , quality='All' , minimum_rating = 0 , 
@@ -58,7 +72,7 @@ Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr
             
             '''
             self.name = re.search("^[^\(]+" ,self.name).group(0).strip() ; 
-            print(self.name) ; 
+            # print(self.name) ; 
             url = "https://yts.ag/api/v2/list_movies.json" ;
 
             url = url+ '?' +  urllib3.request.urlencode({
@@ -74,7 +88,7 @@ Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr
             resp = get(url , timeout = 3) ;
             data = json.loads(resp.text) ; 
             movie = data.get('data').get("movies")[0] ;
-            print(url) ;
+            # print(url) ;
             self.__get_movies_obj__(movie) ;  
 
         
@@ -100,13 +114,15 @@ Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr
                 movie.get('medium_cover_image'),
                 movie.get('large_cover_image')]
 
+
                 self.torrents = [] ;
                 for torrent_item in movie.get('torrents'):
-                    print(torrent_item);
+                    # print(torrent_item);
                     torrent = yify.torrent(torrent_item)
+                    torrent.name = self.title
                     self.torrents.append(torrent) ; 
                     
-                print(self.torrents) ;
+                # print(self.torrents) ;
 
 
 
@@ -119,7 +135,7 @@ Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr
         Returns a list of Movies each movie object having complete details about it '''
 
         self.name = re.search("^[^\(]+" , search_string).group(0).strip() ; 
-        print(self.name) ; 
+        # print(self.name) ; 
         url = "https://yts.ag/api/v2/list_movies.json" ;
 
         url = url+ '?' +  urllib3.request.urlencode({
@@ -165,7 +181,7 @@ Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr
             name = re.search('^[^\(]+' , i.text).group(0).strip() ; 
             name_link[name] = self.homepage + i.get('href') ; 
 
-        print(name_link)
+        # print(name_link)
 
         for key,val in name_link.items():
             movie = self.movie(name = key , page  = val) ; 
@@ -178,8 +194,13 @@ Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr
         
 if __name__=='__main__':
     obj = yify() ; 
-    torrents = obj.get_top_seeded_torrents() ;
-    torrent = torrents[0].getinfo() ; 
-    print(dir(torrent)) ; 
-    # print(dir(obj)) ; 
-    # print(dir(obj.torrent)) ;
+    movies  = obj.get_top_seeded_torrents() ;
+
+    movies[0].getinfo() ;
+    
+    torrent = movies[0].torrents[0] ;
+    torrent.download_torrent_file() ;
+
+    # for i in torrents:
+    #     print(i) ;
+    # print(dir(torrent)) ; 

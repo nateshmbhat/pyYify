@@ -1,1 +1,1 @@
-from yifytops import yify
+from yify import yify

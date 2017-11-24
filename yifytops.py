@@ -1,7 +1,7 @@
 import os
 import json
 import urllib3
-import time;
+import time
 from bs4 import BeautifulSoup
 from requests import get
 import re 
@@ -16,6 +16,12 @@ class yify():
     homepage = "https://www.yify-torrent.org"
 
     class torrent():
+        def __repr__(self):
+            return 'yify.torrent object : quality = {} , size = {} , url = {}'.format(self.quality , self.size, self.url) ; 
+
+        def __str__(self):
+            return 'yify.torrent object : quality = {} , size = {} , url = {}'.format(self.quality , self.size, self.url) ; 
+
         def __init__(self , torrent_dict : dict  ):
                 self.url = torrent_dict.get('url')
                 self.hash = torrent_dict.get('hash')
@@ -34,7 +40,7 @@ class yify():
             self.page = page ; #Link to the torrent page
 
         def __str__(self):
-            return "Name : {}\n Page : {}\n".format(self.name , self.page) ;
+            return "Name : {}\nPage : {}\n".format(self.name , self.page) ;
         def __repr__(self):
             return '''Name : {}
 Page : {}
@@ -167,6 +173,8 @@ Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr
 
         return top_torrents ; 
  
+        
+
         
 if __name__=='__main__':
     obj = yify() ; 

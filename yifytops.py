@@ -7,21 +7,23 @@ from requests import get
 import re 
 
 
+#TODO : add user related functions like registering new users , 
+# Posting COmments from a user and movie reviewing .
+
 
 class yify():
 
     homepage = "https://www.yify-torrent.org"
 
     class torrent():
-        def __init__(self , torrents : list):
-            for i in torrents:
-                self.url = i.get('url')
-                self.hash = i.get('hash')
-                self.quality = i.get('quality')
-                self.seeds = i.get('seeds')
-                self.peers = i.get('peers')
-                self.size = i.get('size')
-                self.date_uploaded = i.get('date_uploaded')
+        def __init__(self , torrent_dict : dict  ):
+                self.url = torrent_dict.get('url')
+                self.hash = torrent_dict.get('hash')
+                self.quality = torrent_dict.get('quality')
+                self.seeds = torrent_dict.get('seeds')
+                self.peers = torrent_dict.get('peers')
+                self.size = torrent_dict.get('size')
+                self.date_uploaded = torrent_dict.get('date_uploaded')
                 
             
 
@@ -36,7 +38,10 @@ class yify():
         def __repr__(self):
             return '''Name : {}
 Page : {}
-Torrent info obtained : {}'''.format(self.name , self.page , True if hasattr(self , 'id') else False) ;
+Torrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr(self , 'id') else False) ;
+
+
+
 
 
         def getinfo(self , quality='All' , minimum_rating = 0 , 
@@ -89,7 +94,15 @@ Torrent info obtained : {}'''.format(self.name , self.page , True if hasattr(sel
                 movie.get('medium_cover_image'),
                 movie.get('large_cover_image')]
 
-                self.torrents = yify.torrent(movie.get('torrents'))
+                self.torrents = [] ;
+                for torrent_item in movie.get('torrents'):
+                    print(torrent_item);
+                    torrent = yify.torrent(torrent_item)
+                    self.torrents.append(torrent) ; 
+                    
+                print(self.torrents) ;
+
+
 
 
 
@@ -130,7 +143,7 @@ Torrent info obtained : {}'''.format(self.name , self.page , True if hasattr(sel
          
 
 
-    def get_top_seeded_torrents(self : yify):
+    def get_top_seeded_torrents(self ) -> list:
         '''Returns a list of Top Seeded Torrent's Movies which are listed in the Yify Website. 
         Each movie in the returned list contains only the 'movie name' and its corresponding 'page' attributes .
         All the rest of the details about the movie and the torrent can be obtained after calling the get_movie_info function on the movie object'''
@@ -141,19 +154,24 @@ Torrent info obtained : {}'''.format(self.name , self.page , True if hasattr(sel
         top_torrents = [] 
         name_link = {} ; 
 
+
         for i in topseeds:
             name = re.search('^[^\(]+' , i.text).group(0).strip() ; 
             name_link[name] = self.homepage + i.get('href') ; 
 
+        print(name_link)
 
-        for key,val in name_link:
+        for key,val in name_link.items():
             movie = self.movie(name = key , page  = val) ; 
             top_torrents.append(movie) ; 
 
+        return top_torrents ; 
  
         
 if __name__=='__main__':
     obj = yify() ; 
-    obj.get_top_seeded_torrents() ;
-    print(getattr(obj)) ; 
-    print(getattr(obj.torrent)) ;
+    torrents = obj.get_top_seeded_torrents() ;
+    torrent = torrents[0].getinfo() ; 
+    print(dir(torrent)) ; 
+    # print(dir(obj)) ; 
+    # print(dir(obj.torrent)) ;

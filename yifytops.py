@@ -70,8 +70,12 @@ class yify():
 
 
 
-        def start_download(self):
-            pass ;
+        def start_downlod(self):
+            if os.name=='nt':
+                os.startfile(self.magnet) ; 
+            else:
+                os.system("xdg-open "+self.magnet) ; 
+            
              
             
 
@@ -92,8 +96,8 @@ class yify():
         order_by = 'desc' , with_rt_ratings='false'):
             '''
             Gets all the info about the torrent and returns a dictionary containing all the info
-            
             '''
+
             self.name = re.search("^[^\(]+" ,self.name).group(0).strip() ; 
             # print(self.name) ; 
             url = "https://yts.ag/api/v2/list_movies.json" ;
@@ -115,6 +119,7 @@ class yify():
             self.__get_movies_obj__(movie) ;  
 
         
+
 
         def __get_movies_obj__(self , movie : dict) : 
                 self.id = movie.get('id')
@@ -221,8 +226,5 @@ if __name__=='__main__':
     movies[0].getinfo() ;
     
     torrent = movies[0].torrents[0] ;
-    torrent.download_torrent_file() ;
-
-    # for i in torrents:
-    #     print(i) ;
-    # print(dir(torrent)) ; 
+    
+    torrent.start_downlod() ;

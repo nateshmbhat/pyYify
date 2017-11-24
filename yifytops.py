@@ -23,15 +23,36 @@ class yify():
         def __str__(self):
             return 'yify.torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
 
-        def __init__(self , torrent_dict : dict  ):
-                self.url = torrent_dict.get('url')
-                self.hash = torrent_dict.get('hash')
-                self.quality = torrent_dict.get('quality')
-                self.seeds = torrent_dict.get('seeds')
-                self.peers = torrent_dict.get('peers')
-                self.size = torrent_dict.get('size')
-                self.date_uploaded = torrent_dict.get('date_uploaded')
-                
+        def __init__(self , torrent_dict : dict  , name =''):
+            self.name = name ; 
+            self.url = torrent_dict.get('url')
+            self.hash = torrent_dict.get('hash')
+            self.quality = torrent_dict.get('quality')
+            self.seeds = torrent_dict.get('seeds')
+            self.peers = torrent_dict.get('peers')
+            self.size = torrent_dict.get('size')
+            self.date_uploaded = torrent_dict.get('date_uploaded')
+
+
+            trackers = [
+            'udp://open.demonii.com:1337/announce',
+            'udp://tracker.openbittorrent.com:80',
+            'udp://tracker.coppersurfer.tk:6969',
+            'udp://glotorrents.pw:6969/announce',
+            'udp://tracker.opentrackr.org:1337/announce',
+            'udp://torrent.gresille.org:80/announce',
+            'udp://p4p.arenabg.com:1337',
+            'udp://tracker.leechers-paradise.org:6969',
+            'http://track.one:1234/announce',
+            'udp://track.two:80'
+            ]
+
+            movie_name_encoded = urllib3.request.urlencode({'dn':self.name}) ; 
+            self.magnet = 'magnet:?xt=urn:btih:{}&{}'.format(self.hash , movie_name_encoded) ; 
+            for tracker in trackers:
+                self.magnet+=('&tr='+tracker)
+            
+
         
         
         def download_torrent_file(self , path : str = os.path.expanduser('~/Downloads/') , filename = '' ):
@@ -48,8 +69,10 @@ class yify():
             urlopen.retrieve(self.url , path+filename)
 
 
+
         def start_download(self):
-            pass ; 
+            pass ;
+             
             
 
 
@@ -118,8 +141,7 @@ class yify():
                 self.torrents = [] ;
                 for torrent_item in movie.get('torrents'):
                     # print(torrent_item);
-                    torrent = yify.torrent(torrent_item)
-                    torrent.name = self.title
+                    torrent = yify.torrent(torrent_item  , name=self.name)
                     self.torrents.append(torrent) ; 
                     
                 # print(self.torrents) ;

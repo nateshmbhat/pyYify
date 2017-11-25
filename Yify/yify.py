@@ -18,10 +18,10 @@ homepage = "https://www.yify-torrent.org"
 
 class torrent():
     def __repr__(self):
-        return 'yify.torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
+        return 'torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
 
     def __str__(self):
-        return 'yify.torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
+        return 'torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
 
     def __init__(self , torrent_dict : dict  , name =''):
         self.name = name ; 
@@ -146,8 +146,8 @@ class movie():
             self.torrents = [] ;
             for torrent_item in movie.get('torrents'):
                 # print(torrent_item);
-                torrent = yify.torrent(torrent_item  , name=self.name)
-                self.torrents.append(torrent) ; 
+                mytorrent = torrent(torrent_item  , name=self.name)
+                self.torrents.append(mytorrent) ; 
                 
             # print(self.torrents) ;
 
@@ -155,13 +155,13 @@ class movie():
 
 
 
-def search_movies(self , search_string : str = ''  , quality: str = 'All', minimum_rating : float  = 0 , 
+def search_movies(search_string : str = ''  , quality: str = 'All', minimum_rating : float  = 0 , 
     genre  : str = '') -> list:
     '''Used to search for particular movies which match the given parameters. 
     The Search String can be a Movie Title/IMDb Code, Actor Name/IMDb Code, Director Name/IMDb Code 
     Returns a list of Movies each movie object having complete details about it '''
 
-    self.name = re.search("^[^\(]+" , search_string).group(0).strip() ; 
+    name = re.search("^[^\(]+" , search_string).group(0).strip() ; 
     # print(self.name) ; 
     url = "https://yts.ag/api/v2/list_movies.json" ;
 
@@ -179,8 +179,8 @@ def search_movies(self , search_string : str = ''  , quality: str = 'All', minim
     if(data.get('data').get('movies')):
         movies = [] ;
         for i in data.get('data').get('movies'):
-            movie = self.movie(name = i.get('title')) ; 
-            movie.__get_movies_obj__(i) ; 
+            mymovie = movie(name = i.get('title')) ; 
+            mymovie.__get_movies_obj__(i) ; 
             movies.append(movie) ; 
 
         return movies ; 
@@ -192,12 +192,12 @@ def search_movies(self , search_string : str = ''  , quality: str = 'All', minim
         
 
 
-def get_top_seeded_torrents(self ) -> list:
+def get_top_seeded_torrents() -> list:
     '''Returns a list of Top Seeded Torrent's Movies which are listed in the Yify Website. 
     Each movie in the returned list contains only the 'movie name' and its corresponding 'page' attributes .
     All the rest of the details about the movie and the torrent can be obtained after calling the get_movie_info function on the movie object'''
 
-    soup = BeautifulSoup(get(self.homepage , timeout=3).text , 'html.parser') ;
+    soup = BeautifulSoup(get(homepage , timeout=3).text , 'html.parser') ;
     topseeds = soup.find(id="topseed").find_all('a');
 
     top_torrents = [] 
@@ -206,13 +206,13 @@ def get_top_seeded_torrents(self ) -> list:
 
     for i in topseeds:
         name = re.search('^[^\(]+' , i.text).group(0).strip() ; 
-        name_link[name] = self.homepage + i.get('href') ; 
+        name_link[name] = homepage + i.get('href') ; 
 
     # print(name_link)
 
     for key,val in name_link.items():
-        movie = self.movie(name = key , page  = val) ; 
-        top_torrents.append(movie) ; 
+        mymovie = movie(name = key , page  = val) ; 
+        top_torrents.append(mymovie) ; 
 
     return top_torrents ; 
 

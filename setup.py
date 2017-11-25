@@ -38,7 +38,7 @@ install_requires = ['bs4' , 'urllib3' ]
 setup(
     name='pyYify',
     packages = ['pyYify'] ,
-    version = 'v1.3',
+    version = 'v1.5',
     py_modules =['os' , 're', 'json' , 'urllib' , 'time' , 'requests'] , 
     description = '''
     This Module is used to get the Top seeded torrents at any given time and get the entire movie details and ratings . 

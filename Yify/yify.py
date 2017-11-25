@@ -220,7 +220,7 @@ def get_top_seeded_torrents(self ) -> list:
 
         
 if __name__=='__main__':
-    
+
     movies  = get_top_seeded_torrents() ;
 
     for movie in movies:

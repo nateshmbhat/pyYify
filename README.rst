@@ -40,13 +40,13 @@ Python3
 ^^^^^^^
 ::
 
-    pip install yify
+    pip install pyYify
 
 or
 
 ::
 
-    pip3 install yify
+    pip3 install pyYify
 
 
 ----------------

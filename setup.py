@@ -51,6 +51,11 @@ setup(
     author_email = 'nateshmbhatofficial@gmail.com' ,
     # download_url = 'https://github.com/nateshmbhat/Yify-Python/archive/v1.7.tar.gz' , 
     keywords=['yify','torrent-python' , 'movie-torrent' , 'torrent' , 'pyyify' , 'Yify' , 'yify torrent' , 'yify download' , 'download yify' , 'yifyer'  , 'yifypy' , 'torrent download' , 'movie torrent' , 'movie downloader', 'movie finder'],
-    classifiers = [] ,
+    classifiers = [
+        
+    'Programming Language :: Python :: 3.2',
+    'Programming Language :: Python :: 3.3',
+    'Programming Language :: Python :: 3.4',
+    ] ,
     install_requires=install_requires
 )

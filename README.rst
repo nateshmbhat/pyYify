@@ -56,28 +56,19 @@ Python3
 Usage :
 ----------------
 
-<<<<<<< HEAD
- * **First create a yify object to use its functions.**
-=======
 
  * **First create a yify object to use its functions.**
  
->>>>>>> b9d0e150531f728001881769a39c7f8a2a5ae7d4
 ::
 
     import yify
     obj = yify.yify()
 
-<<<<<<< HEAD
-There are two classes in yify() namely 'movie' and 'torrent'.
-
-=======
 
 There are two classes in yify() namely 'movie' and 'torrent'.
 
 
 
->>>>>>> b9d0e150531f728001881769a39c7f8a2a5ae7d4
 * **Search for movies.**
 
 On searching , it returns a list of movies (movie objects) .
@@ -88,10 +79,6 @@ On searching , it returns a list of movies (movie objects) .
     movies_list = obj.search_movies(search_string , quality , minimum_rating , genre)
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b9d0e150531f728001881769a39c7f8a2a5ae7d4
 The search_strmovies[0]ing for the movie can be 'Movie Title/IMDb Code, Actor Name/IMDb Code, Director Name/IMDb Code'.
 quality = 'All' , '720p' , '1080p' , '3D'.
 minimum_rating is an imdb_rating.

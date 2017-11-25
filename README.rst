@@ -10,8 +10,9 @@ Its also useful to search for any movie using different parameters and obtain th
 -------------
 Features :
 -------------
-* Search for movie torrents
-* Get the details of any movie which includes
+
+* **Search for movie torrents**
+* **Get the details of any movie which includes**
     - Torrent details of 720p,1080p,3D quality
     - Torrent Magnet links and hashes along with their size and seeds
     - imdb_code
@@ -55,13 +56,18 @@ Python3
 Usage :
 ----------------
 
+
  * **First create a yify object to use its functions.**
+ 
 ::
 
     import yify
     obj = yify.yify()
 
+
 There are two classes in yify() namely 'movie' and 'torrent'.
+
+
 
 * **Search for movies.**
 
@@ -71,6 +77,7 @@ On searching , it returns a list of movies (movie objects) .
 
 
     movies_list = obj.search_movies(search_string , quality , minimum_rating , genre)
+
 
 
 The search_strmovies[0]ing for the movie can be 'Movie Title/IMDb Code, Actor Name/IMDb Code, Director Name/IMDb Code'.

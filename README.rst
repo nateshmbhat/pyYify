@@ -37,6 +37,7 @@ Installation :
 ^^^^^^^
 Python2
 ^^^^^^^
+::
 
     pip install yify
 
@@ -44,6 +45,7 @@ Python2
 ^^^^^^^
 Python3
 ^^^^^^^
+::
 
     pip3 install yify
 
@@ -53,17 +55,23 @@ Python3
 Usage :
 ----------------
 
-* First create a yify object to use its functions. 
+ * **First create a yify object to use its functions.**
+::
 
     import yify
     obj = yify.yify()
 
 There are two classes in yify() namely 'movie' and 'torrent'.
 
-* Search for movies.
+* **Search for movies.**
+
 On searching , it returns a list of movies (movie objects) .
 
+::
+
+
     movies_list = obj.search_movies(search_string , quality , minimum_rating , genre)
+
 
 The search_strmovies[0]ing for the movie can be 'Movie Title/IMDb Code, Actor Name/IMDb Code, Director Name/IMDb Code'.
 quality = 'All' , '720p' , '1080p' , '3D'.
@@ -71,52 +79,61 @@ minimum_rating is an imdb_rating.
 genre = See http://www.imdb.com/genre/ for a list of genres.
 
 
-* Get the top seeded movies from Yify
 
+* **Get the top seeded movies from Yify**
+
+::
 
     movies_list  = obj.get_top_seeded_torrents() ;
 
+
 Returns a list of movies, each movie object only contains its Name and Webpage unlike the searching method which has all the details in the returned movies.
 To get the rest of the movie details use getinfo() method . 
+
+::
+
 
     for movie in movies_list:
         movie.getinfo() ;
 
     
-* Each movie Object has has the following data :
+* **Each movie Object has has the following data :**
 
-    - id
-    - url
-    - imdb_code
-    - title
-    - title_long
-    - slug
-    - year
-    - rating
-    - runtime
-    - genres
-    - summary
-    - description
-    - language
-    - mpa_rating
-    - image_links
-    - torrents
-
-    The movie.torrents is a list of torrents each of which corresponds to the torrent of same movie but of different quality. ('720p' , '1080p' or '3D' ) 
-
-* Each torrent has the following data :
-
-    - name
-    - url
-    - magnet
-    - hash
-    - quality
-    - seeds
-    - peers
-    - size
-    - date_uploaded
+  - id
+  - url
+  - imdb_code
+  - title
+  - title_long
+  - slug
+  - year
+  - rating
+  - runtime
+  - genres
+  - summary
+  - description
+  - language
+  - mpa_rating
+  - image_links
+  - torrents
 
 
+The movie.torrents is a list of torrents each of which corresponds to the torrent of same movie but of different quality. ('720p' , '1080p' or '3D' ) 
+    
+
+* **Each torrent has the following data :**
+
+  - name
+  - url
+  - magnet
+  - hash
+  - quality
+  - seeds
+  - peers
+  - size
+  - date_uploaded
+
+
+::
 
     movie1 = movies_list[0] 
     torrent1 = movie1.torrents[0]
@@ -124,10 +141,17 @@ To get the rest of the movie details use getinfo() method .
     print("Magnet link = " , torrent1.magnet)
 
 
-* Downloading the Torrent file of a movie
+* **Downloading the Torrent file of a movie**
+::
 
     torrent1.download_torrent_file( path , filename )
 
-* Starting the download directly using magnet link without downloading the torrent file .
+
+* **Starting the download directly using magnet link without downloading the torrent file .**
+
 
 This starts the default torrent client prompting the download dialog
+::
+
+    torrent1.start_download()
+

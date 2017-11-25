@@ -58,7 +58,7 @@ Usage :
  
 ::
 
-    from Yify import yify
+    from pyYify import yify
 
 
 There are two classes in yify namely 'movie' and 'torrent'.

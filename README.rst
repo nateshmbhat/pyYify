@@ -54,15 +54,14 @@ Usage :
 ----------------
 
 
-* **First create a yify object to use its functions.**
+* **First import yify to use its functions.**
  
 ::
 
-    import yify
-    obj = yify.yify()
+    from Yify import yify
 
 
-There are two classes in yify() namely 'movie' and 'torrent'.
+There are two classes in yify namely 'movie' and 'torrent'.
 
 
 
@@ -73,7 +72,7 @@ On searching , it returns a list of movies (movie objects) .
 ::
 
 
-    movies_list = obj.search_movies(search_string , quality , minimum_rating , genre)
+    movies_list = yify.search_movies(search_string , quality , minimum_rating , genre)
 
 
 The search_string for the movie can be 'Movie Title/IMDb Code, Actor Name, Director Name'.
@@ -87,7 +86,7 @@ genre = See http://www.imdb.com/genre/ for a list of genres.
 
 ::
 
-    movies_list  = obj.get_top_seeded_torrents() ;
+    movies_list  = yify.get_top_seeded_torrents() ;
 
 
 Returns a list of movies, each movie object only contains its Name and Webpage unlike the searching method which has all the details in the returned movies.

@@ -79,7 +79,7 @@ On searching , it returns a list of movies (movie objects) .
     movies_list = obj.search_movies(search_string , quality , minimum_rating , genre)
 
 
-The search_strmovies[0]ing for the movie can be 'Movie Title/IMDb Code, Actor Name, Director Name'.
+The search_string for the movie can be 'Movie Title/IMDb Code, Actor Name, Director Name'.
 quality = 'All' , '720p' , '1080p' , '3D'.
 minimum_rating is an imdb_rating.
 genre = See http://www.imdb.com/genre/ for a list of genres.

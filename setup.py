@@ -38,7 +38,7 @@ install_requires = ['bs4' , 'urllib3' ]
 setup(
     name='pyYify',
     packages = ['pyYify'] ,
-    version = 'v1.5',
+    version = 'v1.7',
     py_modules =['os' , 're', 'json' , 'urllib' , 'time' , 'requests'] , 
     description = '''
     This Module is used to get the Top seeded torrents at any given time and get the entire movie details and ratings . 
@@ -49,7 +49,7 @@ setup(
     license='MIT', 
     url = 'https://github.com/nateshmbhat/Yify-Python',
     author_email = 'nateshmbhatofficial@gmail.com' ,
-    # download_url = 'https://github.com/nateshmbhat/pyttsx3/archive/v2.6.tar.gz',
+    # download_url = 'https://github.com/nateshmbhat/Yify-Python/archive/v1.7.tar.gz' , 
     keywords=['yify','torrent-python' , 'movie-torrent' , 'torrent' , 'pyyify' , 'Yify' , 'yify torrent' , 'yify download' , 'download yify' , 'yifyer'  , 'yifypy' , 'torrent download' , 'movie torrent' , 'movie downloader', 'movie finder'],
     classifiers = [] ,
     install_requires=install_requires

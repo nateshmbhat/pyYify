@@ -38,7 +38,7 @@ install_requires = ['bs4' , 'urllib3' ]
 setup(
     name='Yify',
     packages = ['Yify'] ,
-    version = 'v1.0',
+    version = 'v1.2',
     description = '''
     This Module is used to get the Top seeded torrents at any given time and get the entire movie details and ratings . 
     Its also useful to search for any movie using different parameters and obtain their magnet link or torrent file of any prefered quality.

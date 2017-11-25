@@ -36,20 +36,17 @@ Installation :
 
 
 ^^^^^^^
-Python2
+Python3
 ^^^^^^^
 ::
 
     pip install yify
 
+or
 
-^^^^^^^
-Python3
-^^^^^^^
 ::
 
     pip3 install yify
-
 
 
 ----------------
@@ -148,6 +145,7 @@ The movie.torrents is a list of torrents each of which corresponds to the torren
 
 
 * **Downloading the Torrent file of a movie**
+
 ::
 
     torrent1.download_torrent_file( path , filename )

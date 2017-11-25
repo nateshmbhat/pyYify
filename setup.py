@@ -24,7 +24,7 @@ SOFTWARE.
 import platform
 from setuptools import setup
 
-install_requires = ['bs4' , 'urllib3' , 'json']
+install_requires = ['bs4' , 'urllib3' ]
 # if platform.system() == 'windows':
 #     install_requires = [
 #         'pypiwin32'
@@ -36,7 +36,7 @@ install_requires = ['bs4' , 'urllib3' , 'json']
 
 
 setup(
-    name='yify',
+    name='Yify',
     packages = ['Yify'] ,
     version = 'v1.0',
     description = '''
@@ -47,7 +47,7 @@ setup(
     author = 'Natesh M Bhat' ,
     url = 'https://github.com/nateshmbhat/Yify-Python',
     author_email = 'nateshmbhatofficial@gmail.com' ,
-    download_url = 'https://github.com/nateshmbhat/pyttsx3/archive/v2.6.tar.gz',
+    # download_url = 'https://github.com/nateshmbhat/pyttsx3/archive/v2.6.tar.gz',
     keywords=['yify','torrent-python' , 'movie-torrent' , 'torrent' , 'pyyify' , 'Yify' , 'yify torrent' , 'yify download' , 'download yify' , 'yifyer'  , 'yifypy' , 'torrent download' , 'movie torrent' , 'movie downloader', 'movie finder'],
     classifiers = [] ,
     install_requires=install_requires

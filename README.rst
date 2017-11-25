@@ -11,18 +11,16 @@ Features :
 ----------
 
 -  **Search for movie torrents**
--  
+-  **Get the details of any movie which includes :**
 
-   **Get the details of any movie which includes**
-       -  Torrent details of 720p,1080p,3D quality
-       -  Torrent Magnet links and hashes along with their size and
-          seeds
-       -  imdb\_code
-       -  Imdb Rating and MPA rating
-       -  Year
-       -  Runtime
-       -  Summary
-       -  Movie Description
+   -  Torrent details of 720p,1080p,3D quality
+   -  Torrent Magnet links and hashes along with their size and seeds
+   -  imdb\_code
+   -  Imdb Rating and MPA rating
+   -  Year
+   -  Runtime
+   -  Summary
+   -  Movie Description
 
 All the above Details are obtained in the form of attributes of
 Yify.movie object each object representing a movie.
@@ -51,7 +49,12 @@ or
 Usage :
 -------
 
--  **First import yify to use its functions.**
+**First import yify to use its functions.**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <!-- -->
 
 ::
 
@@ -59,7 +62,8 @@ Usage :
 
 There are two classes in yify namely 'movie' and 'torrent'.
 
--  **Search for movies.**
+**Search for movies.**
+~~~~~~~~~~~~~~~~~~~~~~
 
 On searching , it returns a list of movies (movie objects) .
 
@@ -72,7 +76,12 @@ Name, Director Name'. quality = 'All' , '720p' , '1080p' , '3D'.
 minimum\_rating is an imdb\_rating. genre = See
 https://www.imdb.com/genre/ for a list of genres.
 
--  **Get the top seeded movies from Yify**
+**Get the top seeded movies from Yify**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <!-- -->
 
 ::
 
@@ -88,7 +97,8 @@ method .
     for movie in movies_list:
         movie.getinfo() ;
 
--  **Each movie Object has has the following data :**
+-  .. rubric:: **Each movie Object has has the following data :**
+      :name: each-movie-object-has-has-the-following-data
 
    -  id
    -  url
@@ -111,7 +121,8 @@ The movie.torrents is a list of torrents each of which corresponds to
 the torrent of same movie but of different quality. ('720p' , '1080p' or
 '3D' )
 
--  **Each torrent has the following data :**
+-  .. rubric:: **Each torrent has the following data :**
+      :name: each-torrent-has-the-following-data
 
    -  name
    -  url
@@ -123,6 +134,10 @@ the torrent of same movie but of different quality. ('720p' , '1080p' or
    -  size
    -  date\_uploaded
 
+.. raw:: html
+
+   <!-- -->
+
 ::
 
     movie1 = movies_list[0] 
@@ -130,14 +145,19 @@ the torrent of same movie but of different quality. ('720p' , '1080p' or
 
     print("Magnet link = " , torrent1.magnet)
 
--  **Downloading the Torrent file of a movie**
+**Downloading the Torrent file of a movie**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <!-- -->
 
 ::
 
     torrent1.download_torrent_file( path , filename )
 
--  **Starting the download directly using magnet link without
-   downloading the torrent file .**
+**Starting the download directly using magnet link without downloading the torrent file .**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This starts the default torrent client prompting the download dialog :
 

@@ -95,7 +95,8 @@ class movie():
     query_term = '' , genre='' , sort_by='date_added' ,
     order_by = 'desc' , with_rt_ratings='false'):
         '''
-        Gets all the info about the torrent and returns a dictionary containing all the info
+        Gets all the info about the movie and adds all the info as data which can be accessed by the called movie object.
+        This function is only needed for the top_seeded movies . For the searched movies , its not needed since they already have all the details.
         '''
 
         self.name = re.search("^[^\(]+" ,self.name).group(0).strip() ; 

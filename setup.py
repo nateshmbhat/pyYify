@@ -24,7 +24,7 @@ SOFTWARE.
 import platform
 from setuptools import setup
 
-install_requires = ['bs4' , 'urllib3' ]
+install_requires = ['bs4' , 'urllib3', 'urllib'  , 'requests']
 # if platform.system() == 'windows':
 #     install_requires = [
 #         'pypiwin32'
@@ -33,17 +33,19 @@ install_requires = ['bs4' , 'urllib3' ]
 #     install_requires = [
 #         'pyobjc>=2.4'
 #     ]
-
+with open("README.rst"  ,"r") as f:
+    long_description = f.read() ; 
 
 setup(
     name='pyYify',
     packages = ['pyYify'] ,
-    version = 'v1.7',
+    version = 'v1.8.4',
     py_modules =['os' , 're', 'json' , 'urllib' , 'time' , 'requests'] , 
     description = '''
     This Module is used to get the Top seeded torrents at any given time and get the entire movie details and ratings . 
     Its also useful to search for any movie using different parameters and obtain their magnet link or torrent file of any prefered quality.
 ''' ,
+    long_description =  long_description , 
     summary = 'Yify torrenter with movie searching and top seeded torrent finding features.'  ,
     author = 'Natesh M Bhat' ,
     license='MIT', 

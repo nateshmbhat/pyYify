@@ -223,7 +223,10 @@ if __name__=='__main__':
     obj = yify() ; 
     movies  = obj.get_top_seeded_torrents() ;
 
-    movies[0].getinfo() ;
+    for movie in movies:
+        movie.getinfo()
+    
+    
     
     torrent = movies[0].torrents[0] ;
     

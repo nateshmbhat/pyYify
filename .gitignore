@@ -101,3 +101,4 @@ ENV/
 .mypy_cache/
 .vscode
 .README.rst.swp
+.test_package.py

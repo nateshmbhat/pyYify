@@ -18,10 +18,10 @@ homepage = "https://www.yify-torrent.org"
 
 class torrent():
     def __repr__(self):
-        return 'torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
+        return '<torrent object : quality = {} , size = {}\n>'.format(self.quality , self.size) ; 
 
     def __str__(self):
-        return 'torrent object : quality = {} , size = {}\n'.format(self.quality , self.size) ; 
+        return '<torrent object : quality = {} , size = {}\n>'.format(self.quality , self.size) ; 
 
     def __init__(self , torrent_dict : dict  , name =''):
         self.name = name ; 
@@ -85,10 +85,10 @@ class movie():
         self.page = page ; #Link to the torrent page
 
     def __str__(self):
-        return "Name : {}\nPage : {}\n".format(self.name , self.page) ;
+        return "<Name : {}\nPage : {}\n>".format(self.name , self.page) ;
 
     def __repr__(self):
-        return '''Name : {}\nPage : {}\nTorrent info obtained : {}\n\n'''.format(self.name , self.page , True if hasattr(self , 'id') else False);
+        return '''<Name : {}\nPage : {}\nTorrent info obtained : {}\n\n>'''.format(self.name , self.page , True if hasattr(self , 'id') else False);
 
 
     def getinfo(self , quality='All' , minimum_rating = 0 , 

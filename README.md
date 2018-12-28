@@ -40,23 +40,24 @@ Installation :
 Python3
 -------
 
-
-
-    pip install pyYify
+```pip
+pip install pyYify
+```
 
 or
 
-
-
-    pip3 install pyYify
+```pip
+pip3 install pyYify
+```
 
 
 ## Usage :
 
 **First import yify to use its functions.**
 
-
-    from pyYify import yify
+```python3
+from pyYify import yify
+```
 
 There are two classes in yify namely 'movie' and 'torrent'.
 
@@ -65,9 +66,9 @@ There are two classes in yify namely 'movie' and 'torrent'.
 
 On searching , it returns a list of movies (movie objects).
 
-
-    movies_list = yify.search_movies(search_string , quality , minimum_rating , genre)
-    
+```python3
+movies_list = yify.search_movies(search_string , quality , minimum_rating , genre)
+```
 
 The search_string for the movie can be 'Movie Title,IMDb Code, Actor
 Name, Director Name'. quality = 'All' , '720p' , '1080p' , '3D'.
@@ -78,17 +79,19 @@ https://www.imdb.com/genre/ for a list of genres.
 ### Get the top seeded movies from Yify
 
 
-
-    movies_list  = yify.get_top_seeded_torrents() ;
+```python3
+movies_list  = yify.get_top_seeded_torrents() ;
+```
 
 Returns a list of movies, each movie object only contains its Name and
 Webpage unlike the searching method which has all the details in the
 returned movies. To get the rest of the movie details use getinfo()
 method.
 
-    for movie in movies_list:
-        movie.getinfo() ;
-
+```python3
+for movie in movies_list:
+    movie.getinfo() ;
+```
 
 
 * Each movie Object has the following data :
@@ -129,24 +132,25 @@ the torrent of same movie but of different quality. ('720p' , '1080p' or
 
 
 
+```python3
+movie1 = movies_list[0] 
 
-    movie1 = movies_list[0] 
-    
-    torrent1 = movie1.torrents[0]
+torrent1 = movie1.torrents[0]
 
-    print("Magnet link = " , torrent1.magnet)
-
+print("Magnet link = " , torrent1.magnet)
+```
 
 ### Downloading the Torrent file of a movie
 
 
-
-    torrent1.download_torrent_file( path , filename )
-
+```python3
+torrent1.download_torrent_file( savepath , filename )
+```
 
 ### Starting the download directly using magnet link without downloading the torrent file .
 
 This starts the default torrent client prompting the download dialog :
 
-
-    torrent1.start_download()
+```python3
+torrent1.start_download()
+```

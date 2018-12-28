@@ -1,12 +1,6 @@
 Yify for Python
 ===============
 
-[![Downloads](https://pepy.tech/badge/pyyify)](https://pepy.tech/project/pyyify)
-
-[![Downloads](https://pepy.tech/badge/pyyify/week)](https://pepy.tech/project/pyyify)
-
-
-
 
 This is Python Library which is used to get the Top seeded torrents at
 any given time and get the entire movie details and ratings .

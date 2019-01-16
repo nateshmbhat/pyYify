@@ -1,7 +1,7 @@
 Yify for Python
 ===============
 
-[![Downloads](https://pepy.tech/badge/pyYify)](https://pepy.tech/project/pyYify) ![Downloads](https://pepy.tech/badge/pyYify/week)  [![](https://img.shields.io/github/languages/code-size/nateshmbhat/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify)  [![](https://img.shields.io/github/license/nateshmbhat/pyYify?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/pypi/v/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/github/languages/top/nateshmbhat/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/badge/author-nateshmbhat-blue.svg)](https://github.com/nateshmbhat)
+[![Downloads](https://pepy.tech/badge/pyYify)](https://pepy.tech/project/pyYify) ![Downloads](https://pepy.tech/badge/pyYify/week)  [![](https://img.shields.io/github/languages/code-size/nateshmbhat/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify)  [![](https://img.shields.io/github/license/nateshmbhat/pyYify?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/pypi/v/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/github/languages/top/nateshmbhat/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/badge/author-nateshmbhat-green.svg)](https://github.com/nateshmbhat)
 
 
 This is Python Library which is used to get the Top seeded torrents at

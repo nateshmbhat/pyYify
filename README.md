@@ -1,8 +1,8 @@
-[![Downloads](https://pepy.tech/badge/pyYify)](https://pepy.tech/project/pyYify) ![Downloads](https://pepy.tech/badge/pyYify/week)    [![](https://img.shields.io/readthedocs/pyYify.svg?style=plastic)](https://pyttsx3.readthedocs.io/en/latest/)  [![](https://img.shields.io/github/languages/code-size/nateshmbhat/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify)  [![](https://img.shields.io/github/license/nateshmbhat/pyYify?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/pypi/v/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/github/languages/top/nateshmbhat/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/badge/author-nateshmbhat-blue.svg)](https://github.com/nateshmbhat)
-
-
 Yify for Python
 ===============
+
+[![Downloads](https://pepy.tech/badge/pyYify)](https://pepy.tech/project/pyYify) ![Downloads](https://pepy.tech/badge/pyYify/week)    [![](https://img.shields.io/readthedocs/pyYify.svg?style=plastic)](https://pyttsx3.readthedocs.io/en/latest/)  [![](https://img.shields.io/github/languages/code-size/nateshmbhat/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify)  [![](https://img.shields.io/github/license/nateshmbhat/pyYify?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/pypi/v/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/github/languages/top/nateshmbhat/pyYify.svg?style=plastic)](https://github.com/nateshmbhat/pyYify) [![](https://img.shields.io/badge/author-nateshmbhat-blue.svg)](https://github.com/nateshmbhat)
+
 
 This is Python Library which is used to get the Top seeded torrents at
 any given time and get the entire movie details and ratings .

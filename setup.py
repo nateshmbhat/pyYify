@@ -25,14 +25,7 @@ import platform
 from setuptools import setup
 
 install_requires = ['bs4' , 'urllib3', 'urllib'  , 'requests']
-# if platform.system() == 'windows':
-#     install_requires = [
-#         'pypiwin32'
-#     ]
-# elif platform.system() == 'darwin':
-#     install_requires = [
-#         'pyobjc>=2.4'
-#     ]
+
 with open("README.rst"  ,"r") as f:
     long_description = f.read() ; 
     long_description.replace('\r' ,'') ;
@@ -50,13 +43,21 @@ setup(
     license='MIT', 
     url = 'https://github.com/nateshmbhat/pyYify',
     author_email = 'nateshmbhatofficial@gmail.com' ,
-    # download_url = 'https://github.com/nateshmbhat/Yify-Python/archive/v1.7.tar.gz' , 
     keywords=['yify','torrent-python' , 'movie-torrent' , 'torrent' , 'pyyify' , 'Yify' , 'yify torrent' , 'yify download' , 'download yify' , 'yifyer'  , 'yifypy' , 'torrent download' , 'movie torrent' , 'movie downloader', 'movie finder'],
-    classifiers = [
-        
-    'Programming Language :: Python :: 3.2',
-    'Programming Language :: Python :: 3.3',
-    'Programming Language :: Python :: 3.4',
+    classifiers = [ 
+          'Environment :: Console',
+          'Intended Audience :: End Users/Desktop',
+          'Intended Audience :: Developers',
+          'Intended Audience :: Information Technology',
+          'Intended Audience :: System Administrators',
+          'Operating System :: MacOS :: MacOS X',
+          'Operating System :: Microsoft :: Windows',
+          'Operating System :: POSIX',
+          'License :: OSI Approved :: MIT License' , 
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7'
     ] ,
     install_requires=install_requires
 )

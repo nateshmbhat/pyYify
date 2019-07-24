@@ -48,7 +48,7 @@ setup(
     summary = 'Yify torrenter with movie searching and top seeded torrent finding features.'  ,
     author = 'Natesh M Bhat' ,
     license='MIT', 
-    url = 'https://github.com/nateshmbhat/Yify-Python',
+    url = 'https://github.com/nateshmbhat/pyYify',
     author_email = 'nateshmbhatofficial@gmail.com' ,
     # download_url = 'https://github.com/nateshmbhat/Yify-Python/archive/v1.7.tar.gz' , 
     keywords=['yify','torrent-python' , 'movie-torrent' , 'torrent' , 'pyyify' , 'Yify' , 'yify torrent' , 'yify download' , 'download yify' , 'yifyer'  , 'yifypy' , 'torrent download' , 'movie torrent' , 'movie downloader', 'movie finder'],

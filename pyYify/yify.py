@@ -70,7 +70,7 @@ class torrent():
 
 
 
-    def start_downlod(self):
+    def start_download(self):
         if os.name=='nt':
             os.startfile(self.magnet) ; 
         else:
@@ -231,4 +231,4 @@ if __name__=='__main__':
     
     torrent = movies[0].torrents[0] ;
     
-    torrent.start_downlod() ;
+    torrent.start_download() ;

@@ -182,7 +182,7 @@ def search_movies(search_string : str = ''  , quality: str = 'All', minimum_rati
         for i in data.get('data').get('movies'):
             mymovie = movie(name = i.get('title')) ; 
             mymovie.__get_movies_obj__(i) ; 
-            movies.append(movie) ; 
+            movies.append(mymovie) ; 
 
         return movies ; 
 
